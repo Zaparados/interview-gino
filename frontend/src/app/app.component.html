@@ -6,7 +6,7 @@
   <div>You have 5 lives. Everytime you guess a wrong letter a live is taken.</div>
   <div>When your lives go to 0, you lose!</div>
   <div class="container">
-    <p><span class="solution">{{ gamestate?.solution }}</span></p>
+    <div class="solution">{{ gamestate?.solution }}</div>
     <div>
       <input type="text" [(ngModel)]="inputText" placeholder="Choose a letter" />
       <button (click)="submitCharacter()">Send</button>

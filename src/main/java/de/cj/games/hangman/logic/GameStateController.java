@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -41,13 +42,16 @@ public class GameStateController {
     @PostMapping("/gamestate")
     public Gamestate tryCharacter(@RequestBody TryRequest tryRequest) {
         Gamestate gameState = tryRequest.gamestate;
-        char character = tryRequest.character.charAt(0);
+        char character = tryRequest.character.toLowerCase(Locale.getDefault()).charAt(0);
 
+        int lives = gameState.getLives();
         String word = gameState.getWord().getWord();
-        gameState.setGuessedLetters(gameState.getGuessedLetters() + character);
+        String guessedLetters = gameState.getGuessedLetters();
+
+        gameState.setGuessedLetters(guessedLetters + character + ", ");
 
         int[] indices = IntStream.range(0, word.length())
-                .filter(i -> word.charAt(i) == character)
+                .filter(i -> word.toLowerCase(Locale.getDefault()).charAt(i) == character)
                 .toArray();
 
         StringBuilder newSolution = new StringBuilder(gameState.getSolution());
@@ -57,7 +61,12 @@ public class GameStateController {
         gameState.setSolution(newSolution.toString());
 
         if(indices.length < 1) {
-            gameState.setLives(gameState.getLives() - 1);
+            gameState.setLives(lives - 1);
+        }
+
+        if(lives == 1) {
+            gameState.setSolution("YOU LOST \n The word was \"" + word + "\". \n These are the letters you tried: " + guessedLetters);
+            return gameState;
         }
 
         return gameState;

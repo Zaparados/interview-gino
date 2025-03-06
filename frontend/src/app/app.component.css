@@ -1,4 +1,6 @@
 .solution {
   letter-spacing: 5px;
   font-size: 50px;
+  margin-bottom: 15px;
+  white-space: pre-wrap;
 }

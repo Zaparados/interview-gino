@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
     this.gameStateService.tryCharacter(this.inputText, this.gamestate).subscribe(data => {
       this.gamestate = data;
     });
+    this.inputText = '';
   }
 
   newWord() {
