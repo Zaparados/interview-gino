@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { GameStateService, Gamestate } from './services/game-state.service'
 import {NgIf} from '@angular/common';
-import console from 'node:console';
+
 
 
 @Component({
@@ -43,6 +43,4 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.newWord();
   }
-
-  protected readonly console = console;
 }
