@@ -1,0 +1,22 @@
+<div style="text-align:center"class="container">
+  <h1>
+    {{title}}
+  </h1>
+  <div>Guess single letters until you find the right word.</div>
+  <div>You have 5 lives. Everytime you guess a wrong letter a live is taken.</div>
+  <div>When your lives go to 0, you lose!</div>
+  <div class="container">
+    <p><span class="solution">{{ gamestate?.solution }}</span></p>
+    <div>
+      <input type="text" [(ngModel)]="inputText" placeholder="Choose a letter" />
+      <button (click)="submitCharacter()">Send</button>
+      <div>Lives left: {{ gamestate?.lives }}</div>
+      <div>
+        <button (click)="hint()">Get a hint</button>
+        <button (click)="newWord()">New word</button>
+      </div>
+    </div>
+    <div *ngIf="showHint">{{ gamestate?.word.hint}}</div>
+  </div>
+</div>
+
